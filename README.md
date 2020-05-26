@@ -32,3 +32,5 @@ COPY mnist_sklearn.py /model
 COPY mnist_cnn_update.py /model
 CMD python3 mnist_cnn.py
 ```
+> - ***Step 1:*** Fetching github repository to download the code
+![Image](https://github.com/Shivamshiv/MlOps_code_optimization/tree/master/Images/job1.png)
