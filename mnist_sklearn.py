@@ -45,7 +45,7 @@ print("Accuracy:  %.2f%%" % (accu*100))
 
 
 file = open("result.txt","w")
-file.write(str(score))
+file.write(str(accu))
 
 
 # In[ ]:
