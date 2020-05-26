@@ -18,4 +18,17 @@ To keep this in mind, I have automated the ml code with the help of docker conta
 Detail setup of the environment:
 
 > - Create a Dockerfile to setup the container environment
-![Image](https://github.com/Shivamshiv/MlOps_code_optimization/tree/master/Images/dockerfile.png)
+```
+FROM centos:latest
+RUN yum update -y
+RUN yum install python36 -y
+RUN yum install python3-pip
+RUN pip3 install --upgrade pip
+RUN pip3 install tensorflow==2.0.0
+RUN pip3 install keras
+WORKDIR /model
+COPY mnist_cnn.py /model
+COPY mnist_sklearn.py /model
+COPY mnist_cnn_update.py /model
+CMD python3 mnist_cnn.py
+```
