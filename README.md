@@ -18,3 +18,4 @@ To keep this in mind, I have automated the ml code with the help of docker conta
 Detail setup of the environment:
 
 > - Create a Dockerfile to setup the container environment
+![Image](https://github.com/Shivamshiv/MlOps_code_optimization/tree/master/Images/dockerfile.png)
