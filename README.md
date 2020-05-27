@@ -32,5 +32,10 @@ COPY mnist_sklearn.py /model
 COPY mnist_cnn_update.py /model
 CMD python3 mnist_cnn.py
 ```
-> - **Step 1:** Fetching github repository to download the code
+> - **Step 1:** Fetching github repository to download the code by triggering it whenever developer commit any changes in the code.
 ![Screenshot_job1](Images/job1.png)
+```
+sudo cp -rvf * /root/mlops
+```
+> - **Step 2:** Launch the container by checking the type of code either it is a simple machine learning model or neural network model.
+![Screenshot_job1](Images/job2.png)
