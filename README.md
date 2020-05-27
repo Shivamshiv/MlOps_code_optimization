@@ -1,7 +1,7 @@
 ## MlOps: Integration of ML and DevOps
 *The model has been created with an ideology to achieve automation. Often, the machine learning model achieves better accuracy with lots of hyper-parameter tuning. But when it comes to the deep neural network, it is really a tedious task to achieve it.*
 
-**Problem statement
+- Problem statement
 ```
 1. Create container image that’s has Python3 and Keras or numpy  installed  using dockerfile 
 2. When we launch this image, it should automatically starts train the model in the container.
@@ -50,7 +50,7 @@ fi
 **Step 3.** Launching the container by ckecking the type of code.
 ![Screenshot_job1](Images/job3.png)
 ```
-if sudo cat /root/mlops/mnist_sklearn.py | grep sklearn
+if sudo cat /root/mlops/mnist_cnn.py | grep sklearn
 then
 	if sudo docker ps -a | grep sklearn_container
     then
@@ -60,12 +60,39 @@ then
     sudo docker run --name sklearn_container -v /root/mlops/sklearn_code:/model/ sklearn_code:v1
     fi
 else
-	if sudo docker ps -a | grep keras_container
+	if sudo docker ps -a | grep cnn_container
     then
-    sudo docker rm -f keras_container
-	sudo docker run --name keras_container -v /root/mlops/cnn_code:/model/ cnn_code:v1
+    sudo docker rm -f cnn_container
+	sudo docker run --name cnn_container -v /root/mlops/cnn_code:/model/ cnn_code:v1
     else
-    sudo docker run --name keras_container -v /root/mlops/cnn_code:/model/ cnn_code:v1
+    sudo docker run --name cnn_container -v /root/mlops/cnn_code:/model/ cnn_code:v1
     fi
 fi
+```
+- Result obtained after running the job3
+![Screenshot_job1](Images/job3_result.png)
+**Step 4:** If model accuracy is not up to the mark i.e. >=80% then some of the hyper-parameters will be tweaked until it gets achieved.
+![Screenshot_job1](Images/job4.png)
+```
+result=$(sudo cat /root/mlops/sklearn_code/result.txt)
+accuracy=$(echo "($result*100)" | bc)
+limit=80
+if [ $accuracy -gt $limit ]
+then
+echo "Accuracy : $accuracy"
+curl -I -u auto:redhat http://192.168.43.164:8080/job/job5_mail/token=model_success
+else
+sudo docker run -dit -v /root/mlops/mnist_cnn_update.py cnn_code:v1 
+fi
+```
+**Step 5:** Mailing the notification if model accuracy not achieved as well as if model accuracy is up to the mark.
+![Screenshot_job1](Images/job5.png)
+**Step 6:** If somehow container not launched or terminated due to any interruption then it will automatically trigger the job to launch the container.
+![Screenshot_job1](Images/job6.png)
+```
+if sudo docker ps -a | grep sklearn_container
+then
+exit 1
+else
+exit 0
 ```
