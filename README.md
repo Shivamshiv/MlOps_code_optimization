@@ -71,6 +71,7 @@ fi
 ```
 - Result obtained after running the job3
 ![Screenshot_job1](Images/job3_result.png)
+
 - **Step 4:** If model accuracy is not up to the mark i.e. >=80% then some of the hyper-parameters will be tweaked until it gets achieved.
 ![Screenshot_job1](Images/job4.png)
 ```
@@ -87,6 +88,7 @@ fi
 ```
 - **Step 5:** Mailing the notification if model accuracy not achieved as well as if model accuracy is up to the mark.
 ![Screenshot_job1](Images/job5.png)
+
 - **Step 6:** If somehow container not launched or terminated due to any interruption then it will automatically trigger the job to launch the container.
 ![Screenshot_job1](Images/job6.png)
 ```
