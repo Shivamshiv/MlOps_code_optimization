@@ -32,12 +32,12 @@ COPY mnist_sklearn.py /model
 COPY mnist_cnn_update.py /model
 CMD python3 mnist_cnn.py
 ```
-**Step 1:** Fetching github repository to download the code by triggering it whenever developer commit any changes in the code.
+- **Step 1:** Fetching github repository to download the code by triggering it whenever developer commit any changes in the code.
 ![Screenshot_job1](Images/job1.png)
 ```
 sudo cp -rvf * /root/mlops
 ```
-**Step 2:** Copy the code to the specific directory by checking the type of code either it is a simple machine learning model or neural network model.
+- **Step 2:** Copy the code to the specific directory by checking the type of code either it is a simple machine learning model or neural network model.
 ![Screenshot_job1](Images/job2.png)
 ```
 if sudo cat /root/mlops/mnist_cnn.py | grep keras
@@ -47,7 +47,7 @@ else
 sudo cp -rvf /root/mlops/mnist_cnn.py /root/mlops/sklearn_code
 fi
 ```
-**Step 3.** Launching the container by ckecking the type of code.
+- **Step 3.** Launching the container by ckecking the type of code.
 ![Screenshot_job1](Images/job3.png)
 ```
 if sudo cat /root/mlops/mnist_cnn.py | grep sklearn
@@ -71,7 +71,7 @@ fi
 ```
 - Result obtained after running the job3
 ![Screenshot_job1](Images/job3_result.png)
-**Step 4:** If model accuracy is not up to the mark i.e. >=80% then some of the hyper-parameters will be tweaked until it gets achieved.
+- **Step 4:** If model accuracy is not up to the mark i.e. >=80% then some of the hyper-parameters will be tweaked until it gets achieved.
 ![Screenshot_job1](Images/job4.png)
 ```
 result=$(sudo cat /root/mlops/sklearn_code/result.txt)
@@ -85,9 +85,9 @@ else
 sudo docker run -dit -v /root/mlops/mnist_cnn_update.py cnn_code:v1 
 fi
 ```
-**Step 5:** Mailing the notification if model accuracy not achieved as well as if model accuracy is up to the mark.
+- **Step 5:** Mailing the notification if model accuracy not achieved as well as if model accuracy is up to the mark.
 ![Screenshot_job1](Images/job5.png)
-**Step 6:** If somehow container not launched or terminated due to any interruption then it will automatically trigger the job to launch the container.
+- **Step 6:** If somehow container not launched or terminated due to any interruption then it will automatically trigger the job to launch the container.
 ![Screenshot_job1](Images/job6.png)
 ```
 if sudo docker ps -a | grep sklearn_container
@@ -99,6 +99,6 @@ exit 0
 - Build pipeline created after running the all the jobs.
 ![Screenshot_job1](Images/build_pipeline.png)
 
-**Note:** This project is not completed yet. Further changes and development is in progress.
+- **Note:** This project is not completed yet. Further changes and development is in progress.
 
 Lastly, I want to the thanks to the Vimal Daga Sir and all the IIEC community group members who are constantly helping knowingly or unlnowlingly.
