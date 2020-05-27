@@ -1,7 +1,7 @@
 ## MlOps: Integration of ML and DevOps
 *The model has been created with an ideology to achieve automation. Often, the machine learning model achieves better accuracy with lots of hyper-parameter tuning. But when it comes to the deep neural network, it is really a tedious task to achieve it.*
 
-- Problem statement
+- **Problem statement:**
 ```
 1. Create container image that’s has Python3 and Keras or numpy  installed  using dockerfile 
 2. When we launch this image, it should automatically starts train the model in the container.
@@ -15,9 +15,9 @@
 ```
 To keep this in mind, I have automated the ml code with the help of docker container and  Jenkins. A separate environment has been built in the docker container with pre-installed required libraries to run the code. First of all, Job of build pipeline will fetch the code from the Github repository. Then, Jenkins will filter the code type i.e. either it is a simple machine learning model or neural network model and as per requirement launch the container. If the model doesn't achieve accuracy up to the mark, a mail will be sent to the developer. And if model crashes, it will automatically trigger the job to build the model again.
 
-Detail setup of the environment:
+- Detail setup of the environment:
 
-Create a Dockerfile to setup the container environment
+- Create a Dockerfile to setup the container environment
 ```
 FROM centos:latest
 RUN yum update -y
@@ -96,3 +96,9 @@ exit 1
 else
 exit 0
 ```
+- Build pipeline created after running the all the jobs.
+![Screenshot_job1](Images/build_pipeline.png)
+
+**Note:** This project is not completed yet. Further changes and development is in progress.
+
+Lastly, I want to the thanks to the Vimal Daga Sir and all the IIEC community group members who are constantly helping knowingly or unlnowlingly.
