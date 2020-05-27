@@ -1,7 +1,7 @@
 ## MlOps: Integration of ML and DevOps
 *The model has been created with an ideology to achieve automation. Often, the machine learning model achieves better accuracy with lots of hyper-parameter tuning. But when it comes to the deep neural network, it is really a tedious task to achieve it.*
 
-> - Problem statement
+**Problem statement
 ```
 1. Create container image that’s has Python3 and Keras or numpy  installed  using dockerfile 
 2. When we launch this image, it should automatically starts train the model in the container.
@@ -17,7 +17,7 @@ To keep this in mind, I have automated the ml code with the help of docker conta
 
 Detail setup of the environment:
 
-> - Create a Dockerfile to setup the container environment
+Create a Dockerfile to setup the container environment
 ```
 FROM centos:latest
 RUN yum update -y
@@ -32,10 +32,40 @@ COPY mnist_sklearn.py /model
 COPY mnist_cnn_update.py /model
 CMD python3 mnist_cnn.py
 ```
-> - **Step 1:** Fetching github repository to download the code by triggering it whenever developer commit any changes in the code.
+**Step 1:** Fetching github repository to download the code by triggering it whenever developer commit any changes in the code.
 ![Screenshot_job1](Images/job1.png)
 ```
 sudo cp -rvf * /root/mlops
 ```
-> - **Step 2:** Launch the container by checking the type of code either it is a simple machine learning model or neural network model.
+**Step 2:** Copy the code to the specific directory by checking the type of code either it is a simple machine learning model or neural network model.
 ![Screenshot_job1](Images/job2.png)
+```
+if sudo cat /root/mlops/mnist_cnn.py | grep keras
+then
+sudo cp -rvf /root/mlops/mnist_cnn.py /root/mlops/cnn_code
+else
+sudo cp -rvf /root/mlops/mnist_cnn.py /root/mlops/sklearn_code
+fi
+```
+**Step 3.** Launching the container by ckecking the type of code.
+![Screenshot_job1](Images/job3.png)
+```
+if sudo cat /root/mlops/mnist_sklearn.py | grep sklearn
+then
+	if sudo docker ps -a | grep sklearn_container
+    then
+    sudo docker rm -f sklearn_container
+    sudo docker run --name sklearn_container -v /root/mlops/sklearn_code:/model/ sklearn_code:v1
+    else
+    sudo docker run --name sklearn_container -v /root/mlops/sklearn_code:/model/ sklearn_code:v1
+    fi
+else
+	if sudo docker ps -a | grep keras_container
+    then
+    sudo docker rm -f keras_container
+	sudo docker run --name keras_container -v /root/mlops/cnn_code:/model/ cnn_code:v1
+    else
+    sudo docker run --name keras_container -v /root/mlops/cnn_code:/model/ cnn_code:v1
+    fi
+fi
+```
