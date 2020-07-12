@@ -103,4 +103,4 @@ exit 0
 
 - **Note:** This project is not completed yet. Further changes and development is in progress.
 
-Lastly, I want to the thanks to the Vimal Daga Sir and all the IIEC community group members who are constantly helping knowingly or unlnowlingly.
+Lastly, I want to thanks to the Vimal Daga Sir and all the IIEC community group members who are constantly helping knowingly or unlnowlingly.
